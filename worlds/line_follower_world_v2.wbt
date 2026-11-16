@@ -1,0 +1,196 @@
+#VRML_SIM R2025b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/b9662bb82ad8b1a9dc9939bc2ef5960f5a475487/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/b9662bb82ad8b1a9dc9939bc2ef5960f5a475487/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/b9662bb82ad8b1a9dc9939bc2ef5960f5a475487/projects/objects/floors/protos/RectangleArena.proto"
+
+WorldInfo {
+  basicTimeStep 16
+  contactProperties [
+    ContactProperties {
+      material1 "caster"
+      coulombFriction [
+        0.02
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.3121853636913438 -0.13681823404418403 0.9401175828213905 4.029718470981594
+  position 1.3040655606428038 1.356344707248537 1.126157871173931
+  follow "line_follower_robot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 2 2
+  floorAppearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "textures/track.png"
+      ]
+    }
+    roughness 1
+    metalness 0
+  }
+  wallHeight 0.05
+}
+Robot {
+  translation 0.2021263894056604 0.002793498148081643 -0.00010273327015688366
+  rotation -0.00029888735669540917 8.645310045829996e-05 0.9999999515961037 2.5074138427673804
+  children [
+    Transform {
+      translation 0 0 0.003
+      rotation 0 0 1 1.570796
+      scale 0.001 0.001 0.001
+      children [
+        CadShape {
+          url [
+            "models/chassis.obj"
+          ]
+        }
+      ]
+    }
+    DEF WHEEL_LEFT HingeJoint {
+      jointParameters HingeJointParameters {
+        position 2912.0699159832175
+        axis 0 1 0
+        anchor -0.0645 0.07455 0.0315
+      }
+      device [
+        RotationalMotor {
+          name "left_motor"
+        }
+      ]
+      endPoint Solid {
+        translation -0.0645 0.07455 0.0315
+        rotation -0.7055660235552514 -0.7055662541306646 -0.06597611262004334 3.2733539642736025
+        children [
+          Transform {
+            scale 0.001 0.001 0.001
+            children [
+              CadShape {
+                url [
+                  "models/wheel_1.obj"
+                ]
+              }
+            ]
+          }
+        ]
+        name "left_wheel"
+        boundingObject Pose {
+          rotation 0 1 0 1.570796
+          children [
+            Cylinder {
+              height 0.025
+              radius 0.0315
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.05
+        }
+        linearVelocity -0.10592952329099355 0.07663462616718078 5.976593108876753e-06
+        angularVelocity -2.6384861263498594 -3.6452294821902904 -0.910287466286564
+      }
+    }
+    DEF WHEEL_RIGHT HingeJoint {
+      jointParameters HingeJointParameters {
+        position 3632.0945709357657
+        axis 0 1 0
+        anchor -0.0645 -0.07555 0.0315
+      }
+      device [
+        RotationalMotor {
+          name "right_motor"
+        }
+      ]
+      endPoint Solid {
+        translation -0.0645 -0.07555 0.0315
+        rotation 0.20107017931469434 0.20107024502341347 0.958718696780542 1.6129410951978491
+        children [
+          Transform {
+            scale 0.001 0.001 0.001
+            children [
+              CadShape {
+                url [
+                  "models/wheel_2.obj"
+                ]
+              }
+            ]
+          }
+        ]
+        name "right_wheel"
+        boundingObject Pose {
+          rotation 0 1 0 1.570796
+          children [
+            Cylinder {
+              height 0.025
+              radius 0.0315
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.05
+        }
+        linearVelocity 0.003575218384549177 -0.002785002029113194 -1.6583817983892582e-05
+        angularVelocity 0.2954896773873996 0.4036119971515182 -0.9001076064221596
+      }
+    }
+    Solid {
+      translation 0.085 0 0.01
+      name "front_caster"
+      contactMaterial "caster"
+      boundingObject Sphere {
+        radius 0.01
+      }
+      physics Physics {
+        density -1
+        mass 0.02
+      }
+    }
+    DistanceSensor {
+      translation 0.095 0.032 0.015
+      rotation 0 1 0 1.570796
+      name "ir_left"
+      lookupTable [
+        0 1000 0
+        0.05 1000 0
+        0.15 0 0
+      ]
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.095 -0.032 0.015
+      rotation 0 1 0 1.570796
+      name "ir_right"
+      lookupTable [
+        0 1000 0
+        0.05 1000 0
+        0.15 0 0
+      ]
+      type "infra-red"
+    }
+  ]
+  name "line_follower_robot"
+  boundingObject Pose {
+    translation 0 0 0.035
+    children [
+      Box {
+        size 0.18 0.11 0.04
+      }
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 0.4
+  }
+  controller "line_follower_ctrl"
+  linearVelocity -0.015272398340351385 0.08719980195941344 7.041562922878598e-06
+  angularVelocity -2.2080612439887804e-05 0.00023654790968836656 -0.9008498745047927
+}
