@@ -11,7 +11,9 @@
 
 <br>
 
-![Preview Simulasi Robot Line Follower di Webots](assets/simulasi-webots.jpg)
+| Desain 3D (Tinkercad) | Simulasi Fisika (Webots) |
+| :---: | :---: |
+| <img src="assets/desain-tinkercad.jpg" width="400" alt="Desain 3D Robot di Tinkercad"/> | <img src="assets/simulasi-webots.jpg" width="400" alt="Simulasi Robot Line Follower di Webots"/> |
 
 </div>
 
